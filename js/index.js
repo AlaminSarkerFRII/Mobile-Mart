@@ -19,8 +19,9 @@ const displayPhone = (phones) =>{
     for (const phone of phones){
         // console.log(phone);
         const div = document.createElement('div'); // create div and append
-        // div.className ="col-md-6"
-        div.innerHTML = `<div class="card m-4 col-sm-12 text-center mb-3" style="width: 18rem;">
+        div.classList.add('col-md-6')
+        div.classList.add('col-sm-12')
+        div.innerHTML = `<div class="card m-4 text-center mb-3" style="width: 18rem;">
         <img class="w-75 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
         <div class="card-body">
             <h4>Brand :${phone.brand}</h4>
@@ -46,7 +47,7 @@ fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
     const singlePhone = allPhones.find(phone =>phone.id===id )
     const div = document.createElement('div');
     containerDiv.innerHTML = "";
-    div.innerHTML = `<div class="card m-4 col-sm-12 text-center mb-3" style="width: 18rem;">
+    div.innerHTML = `<div class="card text-center mb-3" style="width: 18rem;">
     <img class="w-75 mx-auto p-3" src="${singlePhone.image}" class="card-img-top" alt="...">
     <div class="card-body">
         <h4>Brand :${singlePhone.brand}</h4>
