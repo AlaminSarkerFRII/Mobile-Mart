@@ -6,8 +6,8 @@ const containerDiv = document.getElementById('displayAll');
 const loadPhone = () => {
     const input = document.getElementById('input-field');
     const errorMessage = document.getElementById('error-message'); // error sms id 
-    containerDiv.innerHTML = "";//clear main div
-    phoneDetails.innerHTML = "";//clear phoneDetails
+    containerDiv.innerHTML = ""; //clear main div
+    phoneDetails.innerHTML = ""; //clear phoneDetails
     const inputValue = input.value;
     input.value = "";
     // error message
@@ -25,28 +25,31 @@ if(inputValue == ""){
   input.value = "";
   errorMessage.innerText = "" // error sms por empty hobe
 }
-
 }
 
 const displayPhone = (phones) =>{
   //optinal Chaining
-  if(phones.length=== '0'){
-    alert(' oh! phone not found');
+  // console.log(phones.length);
+  if(phones.length==0){
+    alert ("phone not found")
   } else{
     phones.forEach(phone => {
-      // console.log(phone);
+      console.log(phone);
         const div = document.createElement('div'); // create div and appen
-        div.classList.add('col-sm-12')
-        div.innerHTML = `<div class="card text-center mb-3" style="width: 18rem;">
+        div.innerHTML = `<div class="col-lg-4 col-12">
+        <div class="card text-center mb-3" style="width: 18rem;">
         <img class="w-75 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
         <div class="card-body">
           <h4>${phone.phone_name} </h4>
-            <h6>Brand :${phone.brand}</h6>
-          <a href="#" class="btn btn-primary" onClick="getPhoneDetails('${phone.slug}')">See Details</a>
+          <h6>Brand :${phone.brand}</h6>
+          <a href="#" class="btn btn-primary px-2 mx-2" onClick="getPhoneDetails('${phone.slug}')">See Details</a>
         </div>
-      </div>`;
+      </div>
+        </div>
+      `;
       containerDiv.appendChild(div);
   });
+
   }
 }
 
@@ -56,36 +59,40 @@ const getPhoneDetails = id =>{
 fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
 .then((res) => res.json())
 .then((data) => displayPhoneDetails(data.data));
-
 }
 
 // phone details display
   const displayPhoneDetails = (phone) =>{
-    console.log(phone);
+    // console.log(phone);
     containerDiv.innerHTML = ""; // cleard main div
     phoneDetails.innerHTML = "";
     const div = document.createElement('div');
+    div.classList.add('col-12')
     div.innerHTML = `<div class="card mb-3 mx-auto">
-    <img class="w-50 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
-    <div class="card-body">
+    <div class="row">
+    <div class="col-lg-4 col-12" >
+    <img class="w-100 h-100 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
+    </div>
+    <div class="col-lg-8 col-12" >
+    <div class="card-body ">
       <h3 class="text-center fw-bold">${phone.name}</h3>
       <h4>Main Features</h4>
       <p> <span class="fw-bold">Brand:</span> ${phone.brand}</p>
       <p> <span class="fw-bold">Storages:</span> ${phone.mainFeatures.storage} </p>
       <p> <span class="fw-bold">display Size:</span> ${phone.mainFeatures.displaySize} </p>
-      <p> <span class="fw-bold">release Date:</span> ${phone.releaseDate ? phone.releaseDate : "release Date not found" } </p>
+      <p> <span class="fw-bold">release Date:</span> ${phone.releaseDate ? phone.releaseDate : "release Date not found" }</p>
       <div>
       <h4 class="fw-bold"> Others Information</h3>
-      <p> <span class="fw-bold">Bluetooth:</span> ${phone.others.Bluetooth} </p>
-      <p> <span class="fw-bold">GPS:</span> ${phone.others.GPS} </p>
-      <p> <span class="fw-bold">Radio:</span> ${phone.others.Radio} </p>
-      <p> <span class="fw-bold">USB:</span> ${phone.others.USB} </p>
-      <p> <span class="fw-bold">WLAN:</span> ${phone.others.WLAN} </p>
-      <small><span class="fw-bold">Sensors:</span> ${phone.mainFeatures.sensors}</small>
-    </div>
+      <p><span class="fw-bold">Bluetooth:</span>${phone.others?.Bluetooth ? phone.others.Bluetooth: "not found"}</p>
+      <p><span class="fw-bold">Radio:</span> ${phone.others?.Radio ? phone.others.Radio : "not found"} </p>
+      <p><span class="fw-bold">USB:</span> ${phone.others?.USB ? phone.others.USB : "not found"} </p>
+      <p><span class="fw-bold">WLAN:</span> ${phone.others?.WLAN ? phone.others.WLAN : "not found"}</p>
+      <small><span class="fw-bold">Sensors:</span> ${phone.mainFeatures?.sensors ? phone.mainFeatures.sensors : "not found"}</small>
+    </div></div>
+  </div>
   </div>`;
-  phoneDetails.appendChild(div)
-
+  phoneDetails.appendChild(div);
   }
+
 
   

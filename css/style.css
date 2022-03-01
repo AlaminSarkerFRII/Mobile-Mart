@@ -4,24 +4,14 @@
 }
 
 body{
-    background-color: rgb(179, 226, 226);
-}
-
-#displayAll{
-    display : grid;
-    grid-template-columns: repeat(3,1fr);
+    background-color: lightskyblue;
 }
 
 .card{
     box-shadow: 2px 3px 0 rgb(134, 124, 124);
-    background-color:rgb(222, 243, 222);
+    border-radius : 20px;
 }
-p{
-    text-align:start;
-    line-height: 10px;
-    padding-left: 10px;
-    margin-right: 5px;
-}
+
 
 
 
