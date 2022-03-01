@@ -29,21 +29,25 @@ if(inputValue == ""){
 }
 
 const displayPhone = (phones) =>{
-    for (const phone of phones){
-      console.log(phone);
-        const div = document.createElement('div'); // create div and append
-        div.classList.add('col-md-6')
+  //optinal Chaining
+  if(phones.length=== '0'){
+    alert(' oh! phone not found');
+  } else{
+    phones.forEach(phone => {
+      // console.log(phone);
+        const div = document.createElement('div'); // create div and appen
         div.classList.add('col-sm-12')
         div.innerHTML = `<div class="card text-center mb-3" style="width: 18rem;">
         <img class="w-75 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
         <div class="card-body">
-            <h4>Brand :${phone.brand}</h4>
-          <h5 >Name : ${phone.phone_name} </h5>
+          <h4>${phone.phone_name} </h4>
+            <h6>Brand :${phone.brand}</h6>
           <a href="#" class="btn btn-primary" onClick="getPhoneDetails('${phone.slug}')">See Details</a>
         </div>
       </div>`;
       containerDiv.appendChild(div);
-    }
+  });
+  }
 }
 
 //get phone details 
@@ -61,24 +65,27 @@ fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
     containerDiv.innerHTML = ""; // cleard main div
     phoneDetails.innerHTML = "";
     const div = document.createElement('div');
-    div.innerHTML = `<div class="card text-center mb-3 w-100 mx-auto">
-    <img class="w-75 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
+    div.innerHTML = `<div class="card mb-3 mx-auto">
+    <img class="w-50 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
     <div class="card-body">
-        <h5>Name :${phone.name}</h5>
-      <h5>Storages : ${phone.mainFeatures.storage} </h5>
-      <h6> ${phone.slug}</h6>
-      <h6> ${phone.releaseDate}</h6>
-      <button onClick ="showMoreDetails('${phone.slug}')" class="btn btn-primary">Show More...</button>
+      <h3 class="text-center fw-bold">${phone.name}</h3>
+      <h4>Main Features</h4>
+      <p> <span class="fw-bold">Brand:</span> ${phone.brand}</p>
+      <p> <span class="fw-bold">Storages:</span> ${phone.mainFeatures.storage} </p>
+      <p> <span class="fw-bold">display Size:</span> ${phone.mainFeatures.displaySize} </p>
+      <p> <span class="fw-bold">release Date:</span> ${phone.releaseDate ? phone.releaseDate : "release Date not found" } </p>
+      <div>
+      <h4 class="fw-bold"> Others Information</h3>
+      <p> <span class="fw-bold">Bluetooth:</span> ${phone.others.Bluetooth} </p>
+      <p> <span class="fw-bold">GPS:</span> ${phone.others.GPS} </p>
+      <p> <span class="fw-bold">Radio:</span> ${phone.others.Radio} </p>
+      <p> <span class="fw-bold">USB:</span> ${phone.others.USB} </p>
+      <p> <span class="fw-bold">WLAN:</span> ${phone.others.WLAN} </p>
+      <small><span class="fw-bold">Sensors:</span> ${phone.mainFeatures.sensors}</small>
     </div>
   </div>`;
   phoneDetails.appendChild(div)
 
   }
 
-  // show more Details about Single phone
-
-  const showMoreDetails = (moreDetails) =>{
-    console.log(moreDetails);
-
-  }
-
+  

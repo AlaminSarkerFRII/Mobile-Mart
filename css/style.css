@@ -9,9 +9,20 @@ body{
 
 #displayAll{
     display : grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(3,1fr);
 }
 
 .card{
-    box-shadow: 2px 3px 0 grey;
+    box-shadow: 2px 3px 0 rgb(134, 124, 124);
+    background-color:rgb(222, 243, 222);
 }
+p{
+    text-align:start;
+    line-height: 10px;
+    padding-left: 10px;
+    margin-right: 5px;
+}
+
+
+
+
