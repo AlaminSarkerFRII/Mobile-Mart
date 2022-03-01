@@ -34,29 +34,43 @@ const displayPhone = (phones) =>{
     }
 }
 
-const phoneDetails = (id) =>{
-
-
-    const details = document.getElementById('details');
-
+const phoneDetails = id =>{
 fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
 .then((res) => res.json())
-.then((data) =>{
-    const allPhones = data.data.mainFeatures
-    // console.log(allPhones);
-    const singlePhone = allPhones.find(phone =>phone.id===id )
-    const div = document.createElement('div');
-    containerDiv.innerHTML = "";
-    div.innerHTML = `<div class="card text-center mb-3" style="width: 18rem;">
-    <img class="w-75 mx-auto p-3" src="${singlePhone.image}" class="card-img-top" alt="...">
-    <div class="card-body">
-        <h4>Brand :${singlePhone.brand}</h4>
-      <h5 class="card-title">Name : ${singlePhone.memory} </h5>
-    </div>
-  </div>`; 
-
-  details.appendChild(div);
-
-});
+.then((data) => displayPhoneDetails(data.data));
 
 }
+    // const allPhones = (data.data)
+  //   // console.log(allPhones);
+  //   const singlePhone = allPhones.find(phone =>phone.id===id )
+  //   const div = document.createElement('div');
+  //   containerDiv.innerHTML = "";
+  //   div.innerHTML = `<div class="card text-center mb-3" style="width: 18rem;">
+  //   <img class="w-75 mx-auto p-3" src="${singlePhone.image}" class="card-img-top" alt="...">
+  //   <div class="card-body">
+  //       <h4>Brand :${singlePhone.brand}</h4>
+  //     <h5 class="card-title">Name : ${singlePhone.memory} </h5>
+  //   </div>
+  // </div>`; 
+
+  // details.appendChild(div);
+
+  const displayPhoneDetails = (phone) =>{
+    console.log(phone);
+    const phoneDetails =document.getElementById('phone-Details')
+    const div = document.createElement('div');
+   div.classList.add('card')
+    div.innerHTML = `<div class="card text-center mb-3" style="width: 18rem;">
+    <img class="w-75 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h4>Brand :${phone.brand}</h4>
+      <h5 class="card-title">Storages : ${phone.mainFeatures.storage} </h5>
+      <p> ${phone.others}</p>
+    </div>
+  </div>`
+
+  phoneDetails.appendChild(div)
+
+  }
+
+  
