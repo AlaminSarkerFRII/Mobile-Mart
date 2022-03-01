@@ -34,12 +34,11 @@ const displayPhone = (phones) =>{
         const div = document.createElement('div'); // create div and append
         div.classList.add('col-md-6')
         div.classList.add('col-sm-12')
-        div.innerHTML = `<div class="card mx-4 text-center mb-3" style="width: 18rem;">
+        div.innerHTML = `<div class="card text-center mb-3" style="width: 18rem;">
         <img class="w-75 mx-auto p-3" src="${phone.image}" class="card-img-top" alt="...">
         <div class="card-body">
             <h4>Brand :${phone.brand}</h4>
           <h5 >Name : ${phone.phone_name} </h5>
-          <h5 >Name : ${phone.memory} </h5>
           <a href="#" class="btn btn-primary" onClick="getPhoneDetails('${phone.slug}')">See Details</a>
         </div>
       </div>`;
@@ -69,10 +68,17 @@ fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
       <h5>Storages : ${phone.mainFeatures.storage} </h5>
       <h6> ${phone.slug}</h6>
       <h6> ${phone.releaseDate}</h6>
-      <button class="btn btn-primary">Show More...</button>
+      <button onClick ="showMoreDetails('${phone.slug}')" class="btn btn-primary">Show More...</button>
     </div>
   </div>`;
   phoneDetails.appendChild(div)
+
+  }
+
+  // show more Details about Single phone
+
+  const showMoreDetails = (moreDetails) =>{
+    console.log(moreDetails);
 
   }
 

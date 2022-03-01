@@ -9,8 +9,7 @@ body{
 
 #displayAll{
     display : grid;
-    grid-template-columns: repeat(3,1fr);
-    margin-right: 3px;
+    grid-template-columns: repeat(4,1fr);
 }
 
 .card{
