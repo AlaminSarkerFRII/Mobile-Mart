@@ -12,3 +12,7 @@ body{
     grid-template-columns: repeat(3,1fr);
     margin-right: 3px;
 }
+
+.card{
+    box-shadow: 2px 3px 0 grey;
+}
